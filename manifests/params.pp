@@ -1,3 +1,10 @@
+# == Class: tempest::params
+#
+#  Tempest parameters
+#
+# === Parameters
+#
+#  (none)
 #
 class tempest::params {
   case $::osfamily {
