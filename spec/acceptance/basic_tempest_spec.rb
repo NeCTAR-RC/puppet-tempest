@@ -9,9 +9,6 @@ describe 'basic tempest' do
       Exec { logoutput => 'on_failure' }
 
       class { '::tempest':
-        setup_venv         => true,
-        configure_images   => false,
-        configure_networks => false,
       }
       EOS
 
