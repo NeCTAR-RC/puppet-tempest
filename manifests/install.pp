@@ -83,7 +83,6 @@ class tempest::install (
         source   => $tempest_repo_uri,
         branch   => $tempest_repo_branch,
         provider => 'git',
-        #require  => Package['git'],
         user     => $tempest_clone_owner,
       }
 
@@ -93,7 +92,6 @@ class tempest::install (
         source   => $tempest_lib_repo_uri,
         branch   => $tempest_lib_repo_branch,
         provider => 'git',
-        #require  => Package['git'],
         user     => $tempest_clone_owner,
       }
 
@@ -110,9 +108,9 @@ class tempest::install (
 
       # Install tempest-lib to venv
       exec { 'pip-install-tempest-lib':
-        command => "${venv_path}/bin/pip install .",
+        command => "${venv_path}/bin/pip install -e .",
         cwd     => "${tempest_clone_path}/tempest-lib",
-        unless  => "${venv_path}/bin/pip list | grep -E '^tempest-lib \(' ",
+        unless  => "${venv_path}/bin/pip list | grep -E '^tempest-lib ' ",
         timeout => 3600,
         require => [
             Exec['setup-venv'],
@@ -123,9 +121,9 @@ class tempest::install (
 
       # Install tempest to venv
       exec { 'pip-install-tempest':
-        command => "${venv_path}/bin/pip install .",
+        command => "${venv_path}/bin/pip install -e .",
         cwd     => "${tempest_clone_path}/tempest",
-        unless  => "${venv_path}/bin/pip list | grep -E '^tempest \(' ",
+        unless  => "${venv_path}/bin/pip list | grep -E '^tempest ' ",
         timeout => 3600,
         require => [
             Exec['setup-venv'],
