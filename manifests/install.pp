@@ -83,6 +83,7 @@ class tempest::install (
         source   => $tempest_repo_uri,
         branch   => $tempest_repo_branch,
         provider => 'git',
+        require  => Package['git'],
         user     => $tempest_clone_owner,
       }
 
@@ -92,6 +93,7 @@ class tempest::install (
         source   => $tempest_lib_repo_uri,
         branch   => $tempest_lib_repo_branch,
         provider => 'git',
+        require  => Package['git'],
         user     => $tempest_clone_owner,
       }
 
