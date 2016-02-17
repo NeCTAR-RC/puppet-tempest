@@ -135,6 +135,25 @@ class tempest::install (
         ]
       }
 
+      # Make tempest config dir
+      file { ["${venv_path}/etc", "${venv_path}/etc/tempest"]:
+        ensure  => directory,
+        require => [
+          Exec['setup-venv'],
+          Exec['pip-install-tempest'],
+        ],
+      }
+
+      # Copy config
+      exec { 'copy-config':
+        command => "/bin/cp -r ${tempest_clone_path}/tempest/etc/* ${venv_path}/etc/tempest",
+        creates => "${venv_path}/etc/tempest/config-generator.tempest.conf",
+        require => [
+          File["${venv_path}/etc/tempest"],
+          Exec['pip-install-tempest'],
+        ]
+      }
+
       # Generate config
       exec { 'generate-config':
         command => "${venv_path}/bin/oslo-config-generator --config-file ${tempest_clone_path}/tempest/etc/config-generator.tempest.conf --output-file /etc/tempest/tempest.conf",
