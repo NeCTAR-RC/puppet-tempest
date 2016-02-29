@@ -16,15 +16,7 @@
 #    (Optional) Git repository URI to clone from
 #    Defaults to 'git://github.com/openstack/tempest.git'
 #
-#  [*tempest_lib_repo_uri*]
-#    (Optional) Git repository URI to clone from
-#    Defaults to 'git://github.com/openstack/tempest.git'
-#
 #  [*tempest_repo_branch*]
-#    (Optional) Git branch of the code to check out
-#    Defaults to undef
-#
-#  [*tempest_lib_repo_branch*]
 #    (Optional) Git branch of the code to check out
 #    Defaults to undef
 #
@@ -46,20 +38,18 @@
 #
 #  [*venv_path*]
 #    (Optional) Directory to use for the virtualenv
-#    Defaults to '/var/lib/tempest'
+#    Defaults to '/opt/tempest'
 #
 class tempest::install (
   $install_from_source     = true,
   $git_clone               = true,
   $tempest_repo_uri        = 'git://github.com/openstack/tempest.git',
-  $tempest_lib_repo_uri    = 'git://github.com/openstack/tempest-lib.git',
   $tempest_repo_branch     = undef,
-  $tempest_lib_repo_branch = undef,
   $tempest_clone_path      = '/usr/local/src',
   $tempest_clone_owner     = 'root',
   $tempest_config_file     = undef,
   $setup_venv              = true,
-  $venv_path               = '/var/lib/tempest',
+  $venv_path               = '/opt/tempest',
 ) {
 
   include ::tempest::params
@@ -87,16 +77,6 @@ class tempest::install (
         user     => $tempest_clone_owner,
       }
 
-      # Tempest Lib
-      vcsrepo { "${tempest_clone_path}/tempest-lib":
-        ensure   => 'present',
-        source   => $tempest_lib_repo_uri,
-        branch   => $tempest_lib_repo_branch,
-        provider => 'git',
-        require  => Package['git'],
-        user     => $tempest_clone_owner,
-      }
-
       Vcsrepo<||> -> Tempest_config<||>
     }
 
@@ -106,19 +86,6 @@ class tempest::install (
         command => "virtualenv ${venv_path}",
         path    => '/usr/bin',
         creates => "${venv_path}/bin/activate",
-      }
-
-      # Install tempest-lib to venv
-      exec { 'pip-install-tempest-lib':
-        command => "${venv_path}/bin/pip install -e .",
-        cwd     => "${tempest_clone_path}/tempest-lib",
-        unless  => "${venv_path}/bin/pip list | grep -E '^tempest-lib ' ",
-        timeout => 3600,
-        require => [
-            Exec['setup-venv'],
-            Vcsrepo["${tempest_clone_path}/tempest-lib"],
-            Package[$tempest::params::dev_packages],
-        ]
       }
 
       # Install tempest to venv
@@ -131,7 +98,6 @@ class tempest::install (
             Exec['setup-venv'],
             Vcsrepo["${tempest_clone_path}/tempest"],
             Package[$tempest::params::dev_packages],
-            Exec['pip-install-tempest-lib'],
         ]
       }
 
