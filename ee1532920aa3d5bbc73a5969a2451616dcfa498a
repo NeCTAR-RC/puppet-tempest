@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_0e0a1e8a",
+        "filename": "manifests/settings.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-06-01T05:52:01Z",
+      "side": 1,
+      "message": "should this be undef or $::os_service_default? seems to be setting it to $::os_service_default in the method params",
+      "range": {
+        "startLine": 32,
+        "startChar": 17,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "ee1532920aa3d5bbc73a5969a2451616dcfa498a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
