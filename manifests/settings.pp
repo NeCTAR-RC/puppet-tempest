@@ -6,7 +6,7 @@
 #
 #  [*tempest_config_file*]
 #    (Optional) Path to the tempest config file
-#    Defaults to undef
+#    Defaults to '/etc/tempest/tempest.conf'
 #
 #  [*test_accounts*]
 #    (Optional) Create test accounts configuration file.
@@ -90,7 +90,7 @@
 #    Deprecated. Use admin_project_name value instead.
 #
 class tempest::settings (
-  $tempest_config_file                       = undef,
+  $tempest_config_file                       = '/etc/tempest/tempest.conf'
   $test_accounts                             = undef,
   $resources_prefix                          = $::os_service_default,
   $test_accounts_file                        = $::os_service_default,
@@ -126,16 +126,6 @@ class tempest::settings (
   include ::tempest::settings::validation
   include ::tempest::settings::volume
 
-  if $tempest_config_file {
-    $_tempest_config_file = $tempest_config_file
-  }
-  elsif $::tempest::install::install_from_source {
-    $_tempest_config_file = "${::tempest::install::tempest_clone_path}/etc/tempest.conf"
-  }
-  else {
-    $_tempest_config_file = '/etc/tempest/tempest.conf'
-  }
-
   if $admin_tenant_name {
     warning('The tempest::config::admin_tenant_name parameter is deprecated, use tempest::config::admin_project_name instead.')
     $admin_project_name_real = $tenant_name
@@ -163,7 +153,7 @@ class tempest::settings (
     $_test_accounts_file = $test_accounts_file
   }
 
-  Tempest_config { path => $_tempest_config_file }
+  Tempest_config { path => $tempest_config_file }
 
   tempest_config {
     'DEFAULT/resources_prefix':                 value => $resources_prefix;
