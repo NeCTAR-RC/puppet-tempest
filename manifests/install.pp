@@ -39,6 +39,7 @@ class tempest::install (
       'git',
       'python-setuptools',
       'python-virtualenv',
+      'virtualenv',
     ])
     ensure_packages($tempest::params::dev_packages)
 
