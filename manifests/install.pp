@@ -80,7 +80,7 @@ class tempest::install (
 
       # Generate config
       exec { 'generate-config':
-        command => "${venv_path}/bin/oslo-config-generator --config-file ${tempest_clone_path}/tempest/etc/config-generator.tempest.conf --output-file /etc/tempest/tempest.conf",
+        command => "${venv_path}/bin/oslo-config-generator --config-file ${venv_path}/etc/tempest/config-generator.tempest.conf --output-file /etc/tempest/tempest.conf",
         creates => '/etc/tempest/tempest.conf',
         require => [
           Exec['pip-install-tempest'],
