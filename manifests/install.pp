@@ -46,7 +46,7 @@ class tempest::install (
     if $setup_venv {
 
       exec { 'setup-venv':
-        command => "virtualenv ${venv_path}",
+        command => "virtualenv -p python3 ${venv_path}",
         path    => '/usr/bin',
         creates => "${venv_path}/bin/activate",
       }
