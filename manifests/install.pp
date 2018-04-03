@@ -35,15 +35,8 @@ class tempest::install (
   include ::tempest::params
 
   if $install_from_source {
-    $virtualenv_pkg = $::lsbdistcodename ? {
-      'trusty' => 'python-virtualenv',
-      default  => 'virtualenv',
-    }
-    ensure_packages([
-      'git',
-      'python-setuptools',
-      $virtualenv_pkg,
-    ])
+    include ::python
+
     ensure_packages($tempest::params::dev_packages)
 
     file { '/etc/tempest':
