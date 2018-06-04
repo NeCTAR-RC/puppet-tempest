@@ -128,10 +128,6 @@ class tempest::settings (
 
   if $admin_tenant_name {
     warning('The tempest::config::admin_tenant_name parameter is deprecated, use tempest::config::admin_project_name instead.')
-    $admin_project_name_real = $tenant_name
-  }
-  else {
-    $admin_project_name_real = $project_name
   }
 
   if $test_accounts {
