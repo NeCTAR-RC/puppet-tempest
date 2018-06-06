@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e301971b_09c80542",
+        "filename": "manifests/settings.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2018-06-06T23:14:54Z",
+      "side": 1,
+      "message": "this needs to change too",
+      "range": {
+        "startLine": 162,
+        "startChar": 58,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "98ed1415e38bf32ffb816f50a01f4682bcd5d286",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}

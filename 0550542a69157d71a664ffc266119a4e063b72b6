@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e52b014_a57beaf6",
+        "filename": "manifests/settings.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2018-06-06T23:14:54Z",
+      "side": 0,
+      "message": "I\u0027ve checked hiera and we don\u0027t appear too use this at all, possible to remove the whole check?",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 23
+      },
+      "revId": "0550542a69157d71a664ffc266119a4e063b72b6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
