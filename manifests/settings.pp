@@ -105,7 +105,7 @@ class tempest::settings (
   $oslo_concurrency_lock_path                = $::os_service_default,
   $oslo_concurrency_disable_process_locking  = $::os_service_default,
   # DEPRECATED PARAMETERS
-  $admin_tenant_name                         = $::os_service_default,
+  $admin_tenant_name                         = undef,
 ) {
 
   include ::tempest::settings::alarming
@@ -128,10 +128,10 @@ class tempest::settings (
 
   if $admin_tenant_name {
     warning('The tempest::config::admin_tenant_name parameter is deprecated, use tempest::config::admin_project_name instead.')
-    $admin_project_name_real = $tenant_name
+    $admin_project_name_real = $admin_tenant_name
   }
   else {
-    $admin_project_name_real = $project_name
+    $admin_project_name_real = $admin_project_name
   }
 
   if $test_accounts {
@@ -156,18 +156,18 @@ class tempest::settings (
   Tempest_config { path => $tempest_config_file }
 
   tempest_config {
-    'DEFAULT/resources_prefix':                 value => $resources_prefix;
-    'auth/test_accounts_file':                  value => $_test_accounts_file;
-    'auth/use_dynamic_credentials':             value => $use_dynamic_credentials;
-    'auth/tempest_roles':                       value => $tempest_roles;
-    'auth/default_credentials_domain_name':     value => $default_credentials_domain_name;
-    'auth/create_isolated_networks':            value => $create_isolated_networks;
-    'auth/admin_username':                      value => $admin_username;
-    'auth/admin_project_name':                  value => $admin_project_name_real;
-    'auth/admin_password':                      value => $admin_password, secret => true;
-    'auth/admin_domain_name':                   value => $admin_domain_name;
-    'oslo_concurrency/lock_path':               value => $oslo_concurrency_lock_path;
-    'oslo_concurrency/disable_process_locking': value => $oslo_concurrency_disable_process_locking;
+    'DEFAULT/resources_prefix':                                   value => $resources_prefix;
+    'auth/admin_domain_name':                                     value => $admin_domain_name;
+    'auth/admin_password':                                        value => $admin_password;
+    'auth/admin_username':                                        value => $admin_username;
+    'auth/admin_project_name':                                    value => $admin_project_name_real;
+    'auth/default_credentials_domain_name':                       value => $default_credentials_domain_name;
+    'auth/create_isolated_networks':                              value => $create_isolated_networks;
+    'auth/use_dynamic_credentials':                               value => $use_dynamic_credentials;
+    'auth/test_accounts_file':                                    value => $_test_accounts_file;
+    'oslo_concurrency/lock_path':                                 value => $oslo_concurrency_lock_path;
+    'oslo_concurrency/disable_process_locking':                   value => $oslo_concurrency_disable_process_locking;
   }
+
 
 }
