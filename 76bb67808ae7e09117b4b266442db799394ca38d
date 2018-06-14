@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e187050a_8fd4407c",
+        "filename": "manifests/settings.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2018-06-14T13:22:32Z",
+      "side": 1,
+      "message": "I\u0027m finding it hard for me to understand what changed here. Why did you re-order the params?",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 3
+      },
+      "revId": "76bb67808ae7e09117b4b266442db799394ca38d",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}

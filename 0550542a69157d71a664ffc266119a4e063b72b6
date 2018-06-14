@@ -22,6 +22,29 @@
       "revId": "0550542a69157d71a664ffc266119a4e063b72b6",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6903ee5_0b77b23f",
+        "filename": "manifests/settings.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2018-06-14T13:22:32Z",
+      "side": 0,
+      "message": "why did you drop this?",
+      "range": {
+        "startLine": 167,
+        "startChar": 74,
+        "endLine": 167,
+        "endChar": 89
+      },
+      "revId": "0550542a69157d71a664ffc266119a4e063b72b6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
