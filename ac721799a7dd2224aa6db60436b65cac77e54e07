@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c372964f_c87c23f8",
+        "filename": "manifests/settings.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2018-07-10T06:24:04Z",
+      "side": 1,
+      "message": "We don\u0027t have this set anywhere in hiera and I propose we just remove this",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 53
+      },
+      "revId": "ac721799a7dd2224aa6db60436b65cac77e54e07",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
