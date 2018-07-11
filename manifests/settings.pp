@@ -86,9 +86,6 @@
 #    (Optional) Enables or disables inter-process locks.
 #    Defaults to $::os_service_default
 #
-#  [*admin_tenant_name*]
-#    Deprecated. Use admin_project_name value instead.
-#
 class tempest::settings (
   $tempest_config_file                       = '/etc/tempest/tempest.conf',
   $test_accounts                             = undef,
@@ -104,8 +101,6 @@ class tempest::settings (
   $admin_domain_name                         = $::os_service_default,
   $oslo_concurrency_lock_path                = $::os_service_default,
   $oslo_concurrency_disable_process_locking  = $::os_service_default,
-  # DEPRECATED PARAMETERS
-  $admin_tenant_name                         = $::os_service_default,
 ) {
 
   include ::tempest::settings::alarming
@@ -125,14 +120,6 @@ class tempest::settings (
   include ::tempest::settings::telemetry
   include ::tempest::settings::validation
   include ::tempest::settings::volume
-
-  if $admin_tenant_name {
-    warning('The tempest::config::admin_tenant_name parameter is deprecated, use tempest::config::admin_project_name instead.')
-    $admin_project_name_real = $tenant_name
-  }
-  else {
-    $admin_project_name_real = $project_name
-  }
 
   if $test_accounts {
     if $test_accounts_file != $::os_service_default {
@@ -159,11 +146,10 @@ class tempest::settings (
     'DEFAULT/resources_prefix':                 value => $resources_prefix;
     'auth/test_accounts_file':                  value => $_test_accounts_file;
     'auth/use_dynamic_credentials':             value => $use_dynamic_credentials;
-    'auth/tempest_roles':                       value => $tempest_roles;
     'auth/default_credentials_domain_name':     value => $default_credentials_domain_name;
     'auth/create_isolated_networks':            value => $create_isolated_networks;
     'auth/admin_username':                      value => $admin_username;
-    'auth/admin_project_name':                  value => $admin_project_name_real;
+    'auth/admin_project_name':                  value => $admin_project_name;
     'auth/admin_password':                      value => $admin_password, secret => true;
     'auth/admin_domain_name':                   value => $admin_domain_name;
     'oslo_concurrency/lock_path':               value => $oslo_concurrency_lock_path;
