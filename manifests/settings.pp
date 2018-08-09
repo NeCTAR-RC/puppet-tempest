@@ -103,6 +103,8 @@ class tempest::settings (
   $oslo_concurrency_disable_process_locking  = $::os_service_default,
 ) {
 
+  Tempest_config { path => $tempest_config_file }
+
   include ::tempest::settings::alarming
   include ::tempest::settings::baremetal
   include ::tempest::settings::compute
@@ -139,8 +141,6 @@ class tempest::settings (
   else {
     $_test_accounts_file = $test_accounts_file
   }
-
-  Tempest_config { path => $tempest_config_file }
 
   tempest_config {
     'DEFAULT/resources_prefix':                 value => $resources_prefix;
