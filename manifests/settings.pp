@@ -156,4 +156,13 @@ class tempest::settings (
     'oslo_concurrency/disable_process_locking': value => $oslo_concurrency_disable_process_locking;
   }
 
+  file { '/etc/tempest/logging.conf':
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    source  => "puppet:///modules/tempest/logging.conf",
+  }
+
+
 }
